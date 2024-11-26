@@ -139,6 +139,21 @@ class ContactPerson {
           System.out.println("Contact not found!");
       }
 
+      public void deleteContact(String name) {
+          for (int i = 0; i < contactCount; i++) {
+              if (contacts[i].getFirstName().equalsIgnoreCase(name)) {
+                  for (int j = i; j < contactCount - 1; j++) {
+                      contacts[j] = contacts[j + 1]; // Shift contacts left
+                  }
+                  contacts[contactCount - 1] = null; // Clear the last contact
+                  contactCount--;
+                  System.out.println("Contact deleted successfully!");
+                  return;
+              }
+          }
+          System.out.println("Contact not found!");
+      }
+
 
       public void showContacts() {
          for (int i = 0; i < contactCount; i++) {
@@ -182,6 +197,10 @@ public class AddressBookMain {
         String nameToEdit = scanner.nextLine();
         addressBook.editContact(nameToEdit, scanner);
         addressBook.showContacts();
+
+        System.out.println("Enter the name of the contact to delete: ");
+        String nameToDelete = scanner.nextLine();
+        addressBook.deleteContact(nameToDelete);
     }
 
 }
