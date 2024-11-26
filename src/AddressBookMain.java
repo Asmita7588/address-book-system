@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 class ContactPerson {
+
     private String firstName;
     private String lastName;
     private String address;
@@ -21,6 +22,72 @@ class ContactPerson {
         this.email = email;
     }
 
+    // Getters
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    // Setters
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "ContactPerson {" +
@@ -34,6 +101,8 @@ class ContactPerson {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+
 }
 
   class AddressBook {
@@ -49,7 +118,29 @@ class ContactPerson {
          }
      }
 
-     public void showContacts() {
+      public void editContact(String name, Scanner scanner) {
+          for (int i = 0; i < contactCount; i++) {
+              if (contacts[i].getFirstName().equalsIgnoreCase(name)) {
+                  System.out.println("Enter new address:");
+                  contacts[i].setAddress(scanner.nextLine());
+                  System.out.println("Enter new city:");
+                  contacts[i].setCity(scanner.nextLine());
+                  System.out.println("Enter new state:");
+                  contacts[i].setState(scanner.nextLine());
+                  System.out.println("Enter new zip:");
+                  contacts[i].setZip(scanner.nextLine());
+                  System.out.println("Enter new phone number:");
+                  contacts[i].setPhoneNumber(scanner.nextLine());
+                  System.out.println("Enter new email:");
+                  contacts[i].setEmail(scanner.nextLine());
+                  return;
+              }
+          }
+          System.out.println("Contact not found!");
+      }
+
+
+      public void showContacts() {
          for (int i = 0; i < contactCount; i++) {
              System.out.println(contacts[i]);
          }
@@ -84,7 +175,13 @@ public class AddressBookMain {
         String email = scanner.nextLine();
 
         ContactPerson newContact = new ContactPerson(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        addressBook.addContact(newContact);
+        addressBook.showContacts();
 
+        System.out.println("Enter the name of the contact to edit:");
+        String nameToEdit = scanner.nextLine();
+        addressBook.editContact(nameToEdit, scanner);
         addressBook.showContacts();
     }
+
 }
