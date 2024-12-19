@@ -20,7 +20,8 @@ public class AddressBookMain {
             System.out.println("2. Display Contacts");
             System.out.println("3.Add new AddressBook");
             System.out.println("4. Display AddressBook");
-            System.out.println("5. Exit");
+            System.out.println("5. Add person to Address Book");
+            System.out.println("6. Exit");
 
 
             int option = scanner.nextInt();
@@ -37,10 +38,14 @@ public class AddressBookMain {
                     newAddressBook.addressBook();
                     break;
                 case 4:
-                    newAddressBook.DisplayAddessBooks();
+                    newAddressBook.DisplayAddressBooks();
                     System.out.println();
                     break;
                 case 5:
+                    newAddressBook.addressBook();
+                    newAddressBook.addPersonToAddressBook();
+                    break;
+                case 6:
                     repeat = false;
                    break;
 

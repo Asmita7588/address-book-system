@@ -1,5 +1,6 @@
 class ContactPerson {
 
+
     private String firstName;
     private String lastName;
     private String address;
@@ -85,6 +86,7 @@ class ContactPerson {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {

@@ -1,14 +1,24 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 class AddressBook {
+    private Set<ContactPerson> addContacts;
 
+    public AddressBook() {
+        this.addContacts = new HashSet<>();
+    }
     private List<ContactPerson> Mulcontact = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     private ContactPerson[] contacts = new ContactPerson[100];
     private int contactCount = 0;
 
+    public boolean addContactToAddressBook(ContactPerson contact) {
+
+        if (addContacts.stream().anyMatch(existingContact -> existingContact.equals(contact))) {
+            return false;
+        }
+        addContacts.add(contact);
+        return true;
+    }
     public void addContact() {
         System.out.println("Enter First Name:");
         String firstName = scanner.nextLine();
