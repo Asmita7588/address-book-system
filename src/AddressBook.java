@@ -32,6 +32,8 @@ class AddressBook {
         System.out.println("Contact added successfully!");
     }
 
+
+
     public void editContact(String name, Scanner scanner) {
         for (int i = 0; i < contactCount; i++) {
             if (contacts[i].getFirstName().equalsIgnoreCase(name)) {
