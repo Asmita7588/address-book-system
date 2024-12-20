@@ -4,6 +4,8 @@ import java.util.stream.Collectors;
 public class NewAddressBook extends AddressBook {
 
     static Map<String, NewAddressBook> addressBookDictionary = new HashMap<>();
+    static Map<String, List<ContactPerson>> cityToPersonMap = new HashMap<>();
+    static Map<String, List<ContactPerson>> stateToPersonMap = new HashMap<>();
 
     public NewAddressBook() {
 
@@ -97,7 +99,42 @@ public class NewAddressBook extends AddressBook {
     }
 
 
+    public void viewPersonsByCityOrState() {
+
+        System.out.println("Enter 1 to view by City or 2 to view by State:");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Clear the buffer
+
+        if (choice != 1 && choice != 2) {
+            System.out.println("Invalid choice! Please choose either 1 or 2.");
+            return;
+        }
+
+        System.out.println(choice == 1 ? "Enter the city:" : "Enter the state:");
+        String location = scanner.nextLine();
+
+        //for city
+        List<ContactPerson> resultForCity = Mulcontact.stream()
+                .filter(contact -> (contact.getCity().equalsIgnoreCase(location)))
+                .collect(Collectors.toList());
+        cityToPersonMap.put("List of person in city", resultForCity);
+
+        //for state
+        List<ContactPerson> resultForState = Mulcontact.stream()
+                .filter(contact -> ( contact.getState().equalsIgnoreCase(location)))
+                .collect(Collectors.toList());
+        stateToPersonMap.put("List of person in state", resultForState);
+
+        Map<String, List<ContactPerson>> mapToUse = (choice == 1) ? cityToPersonMap : stateToPersonMap;
+       // List<ContactPerson> persons = mapToUse.getOrDefault(location, Collections.emptyList());
+
+        if ( mapToUse == cityToPersonMap && resultForCity.isEmpty() || mapToUse == stateToPersonMap && resultForState.isEmpty()) {
+            System.out.println("No persons found " + (choice == 1 ? "city" : "state") + ".");
+        } else {
+            System.out.println("Persons found in " + location + ":");
+            resultForCity.forEach(System.out::println);
+        }
 
 
-
+    }
 }
