@@ -132,9 +132,48 @@ public class NewAddressBook extends AddressBook {
             System.out.println("No persons found " + (choice == 1 ? "city" : "state") + ".");
         } else {
             System.out.println("Persons found in " + location + ":");
-            resultForCity.forEach(System.out::println);
+            resultForCity.forEach(System.out::println );
+        }
+    }
+
+
+    public void countByCityOrState() {
+        System.out.println("Enter 1 to count by City or 2 to count by State:");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice != 1 && choice != 2) {
+            System.out.println("Invalid choice! Please choose either 1 or 2.");
+            return;
+        }
+
+        System.out.println(choice == 1 ? "Enter the city:" : "Enter the state:");
+        String location = scanner.nextLine();
+
+
+
+        List<ContactPerson> resultForCity = Mulcontact.stream()
+                .filter(contact -> (contact.getCity().equalsIgnoreCase(location)))
+                .collect(Collectors.toList());
+        cityToPersonMap.put("List of person in city", resultForCity);
+
+        //for state
+        List<ContactPerson> resultForState = Mulcontact.stream()
+                .filter(contact -> (contact.getState().equalsIgnoreCase(location)))
+                .collect(Collectors.toList());
+        stateToPersonMap.put("List of person in state", resultForState);
+
+         List<ContactPerson> mapToUse = (choice == 1) ? resultForCity : resultForState;
+
+        if (mapToUse == resultForCity) {
+            long countCity = resultForCity.stream().count();
+            System.out.println("Number of persons in " + location + ": " + countCity);
+        } else {
+            long countState = resultForState.stream().count();
+            System.out.println("Number of persons in " + location + ": " + countState);
         }
 
 
     }
 }
+
