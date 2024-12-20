@@ -21,7 +21,9 @@ public class AddressBookMain {
             System.out.println("3.Add new AddressBook");
             System.out.println("4. Display AddressBook");
             System.out.println("5. Add person to Address Book");
-            System.out.println("6. Exit");
+            System.out.println("6. search Persons By City Or State");
+
+            System.out.println("7. Exit");
 
 
             int option = scanner.nextInt();
@@ -46,6 +48,9 @@ public class AddressBookMain {
                     newAddressBook.addPersonToAddressBook();
                     break;
                 case 6:
+                    newAddressBook.searchPersonsByCityOrState();
+                    break;
+                case 7:
                     repeat = false;
                    break;
 

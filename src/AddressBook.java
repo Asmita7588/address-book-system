@@ -1,12 +1,14 @@
 import java.util.*;
 
 class AddressBook {
-    private Set<ContactPerson> addContacts;
+
+
+    private final HashSet<Object> addContacts;
 
     public AddressBook() {
         this.addContacts = new HashSet<>();
     }
-    private List<ContactPerson> Mulcontact = new ArrayList<>();
+    List<ContactPerson> Mulcontact = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     private ContactPerson[] contacts = new ContactPerson[100];
     private int contactCount = 0;

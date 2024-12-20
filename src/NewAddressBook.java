@@ -1,5 +1,5 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class NewAddressBook extends AddressBook {
 
@@ -64,12 +64,40 @@ public class NewAddressBook extends AddressBook {
 
         ContactPerson newContact = new ContactPerson(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
-          boolean  isAdded = addressBook.addContactToAddressBook(newContact);
+          boolean  isAdded = Mulcontact.add(newContact);
         if (isAdded) {
+
             System.out.println("Person added successfully to the Address Book '" + addressBookName + "'.");
         } else {
             System.out.println("Duplicate entry! A person with the same name already exists in the Address Book.");
         }
 
     }
+
+
+    public void searchPersonsByCityOrState() {
+        System.out.println("Enter 1 to search by City or 2 to search by State:");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Enter the name of the City/State:");
+        String location = scanner.nextLine();
+
+        List<ContactPerson> result = Mulcontact.stream()
+                .filter(contact -> (choice == 1 && contact.getCity().equalsIgnoreCase(location)) ||
+                        (choice == 2 && contact.getState().equalsIgnoreCase(location)))
+                .collect(Collectors.toList());
+
+        if (result.isEmpty()) {
+            System.out.println("No contacts found for the given location.");
+        } else {
+            System.out.println("Contacts found:");
+            result.forEach(System.out::println);
+        }
+    }
+
+
+
+
+
 }

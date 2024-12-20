@@ -1,9 +1,16 @@
+import java.util.Set;
+
 class ContactPerson {
 
-
+    private Set<ContactPerson> addContacts;
     private String firstName;
     private String lastName;
     private String address;
+
+    public Set<ContactPerson> getAddContacts() {
+        return addContacts;
+    }
+
     private String city;
     private String state;
     private String zip;
