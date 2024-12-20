@@ -175,5 +175,20 @@ public class NewAddressBook extends AddressBook {
 
 
     }
+
+    public void sortContactsByName() {
+        if (Mulcontact.isEmpty()) {
+            System.out.println("No contacts available to sort!");
+            return;
+        }
+
+        System.out.println("Sorting contacts alphabetically by name...");
+
+        // Sorting using streams
+        Mulcontact.stream()
+                .sorted(Comparator.comparing(contact -> contact.getFirstName().toLowerCase()))
+                .forEach(System.out::println);
+    }
+
 }
 
