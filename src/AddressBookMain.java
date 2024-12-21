@@ -1,17 +1,21 @@
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 
 public class AddressBookMain {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome To Address Book");
-
         AddressBook addressBook = new AddressBook();
         NewAddressBook newAddressBook = new NewAddressBook();
+        FileOperations fileOperations = new FileOperations();
+        List<ContactPerson> mulContact = new ArrayList<>();
+        ContactPerson contact1 = new ContactPerson("Asmita", "gir", "ngp", "nagpur", "mh", "62701", "555-1234", "johndoe@example.com");
+        ContactPerson contact2 =new ContactPerson("simaran", "lanje", "pune", "pune", "up", "62701", "555-5678", "janesmith@example.com");
+        mulContact.add(contact1);
+        mulContact.add(contact2);
         System.out.println("_______________________________________________________________");
         boolean repeat = true;
         while (repeat) {
@@ -26,7 +30,9 @@ public class AddressBookMain {
             System.out.println("8. count person by city or state");
             System.out.println("9. sort contact by persons name");
             System.out.println("10. sort contact by persons city , state, Zip");
-            System.out.println("11. Exit");
+            System.out.println("11. Ability to write and from Address book Contacts.");
+            System.out.println("12. Ability to read and from Address book Contacts.");
+            System.out.println("13. Exit");
 
 
             int option = scanner.nextInt();
@@ -93,6 +99,12 @@ public class AddressBookMain {
                         }
                     }
                 case 11:
+                    fileOperations.writeToFile(mulContact);
+                    break;
+                case 12:
+                    fileOperations.readFromFile();
+                    break;
+                case 13:
                     repeat = false;
                    break;
                 default:
@@ -102,6 +114,21 @@ public class AddressBookMain {
 
 
         }
+            final String fileName = "AddressBook.txt";
+            File file = new File(fileName);
 
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("File created: " + file.getName());
+                } else {
+                    System.out.println("File already exists.");
+                }
+            } catch (IOException e) {
+                System.out.println("An error occurred while creating the file");
+                e.printStackTrace();
+
+            }
+
+
+        }
     }
-}

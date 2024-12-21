@@ -9,6 +9,7 @@ class AddressBook {
         this.addContacts = new HashSet<>();
     }
     List<ContactPerson> mulcontact = new ArrayList<>();
+
     static Scanner scanner = new Scanner(System.in);
     private ContactPerson[] contacts = new ContactPerson[100];
     private int contactCount = 0;
