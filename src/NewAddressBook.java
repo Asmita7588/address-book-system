@@ -66,7 +66,7 @@ public class NewAddressBook extends AddressBook {
 
         ContactPerson newContact = new ContactPerson(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
-          boolean  isAdded = Mulcontact.add(newContact);
+          boolean  isAdded = mulcontact.add(newContact);
         if (isAdded) {
 
             System.out.println("Person added successfully to the Address Book '" + addressBookName + "'.");
@@ -85,7 +85,7 @@ public class NewAddressBook extends AddressBook {
         System.out.println("Enter the name of the City/State:");
         String location = scanner.nextLine();
 
-        List<ContactPerson> result = Mulcontact.stream()
+        List<ContactPerson> result = mulcontact.stream()
                 .filter(contact -> (choice == 1 && contact.getCity().equalsIgnoreCase(location)) ||
                         (choice == 2 && contact.getState().equalsIgnoreCase(location)))
                 .collect(Collectors.toList());
@@ -114,13 +114,13 @@ public class NewAddressBook extends AddressBook {
         String location = scanner.nextLine();
 
         //for city
-        List<ContactPerson> resultForCity = Mulcontact.stream()
+        List<ContactPerson> resultForCity = mulcontact.stream()
                 .filter(contact -> (contact.getCity().equalsIgnoreCase(location)))
                 .collect(Collectors.toList());
         cityToPersonMap.put("List of person in city", resultForCity);
 
         //for state
-        List<ContactPerson> resultForState = Mulcontact.stream()
+        List<ContactPerson> resultForState = mulcontact.stream()
                 .filter(contact -> ( contact.getState().equalsIgnoreCase(location)))
                 .collect(Collectors.toList());
         stateToPersonMap.put("List of person in state", resultForState);
@@ -152,13 +152,13 @@ public class NewAddressBook extends AddressBook {
 
 
 
-        List<ContactPerson> resultForCity = Mulcontact.stream()
+        List<ContactPerson> resultForCity = mulcontact.stream()
                 .filter(contact -> (contact.getCity().equalsIgnoreCase(location)))
                 .collect(Collectors.toList());
         cityToPersonMap.put("List of person in city", resultForCity);
 
         //for state
-        List<ContactPerson> resultForState = Mulcontact.stream()
+        List<ContactPerson> resultForState = mulcontact.stream()
                 .filter(contact -> (contact.getState().equalsIgnoreCase(location)))
                 .collect(Collectors.toList());
         stateToPersonMap.put("List of person in state", resultForState);
@@ -172,12 +172,10 @@ public class NewAddressBook extends AddressBook {
             long countState = resultForState.stream().count();
             System.out.println("Number of persons in " + location + ": " + countState);
         }
-
-
     }
 
     public void sortContactsByName() {
-        if (Mulcontact.isEmpty()) {
+        if (mulcontact.isEmpty()) {
             System.out.println("No contacts available to sort!");
             return;
         }
@@ -185,9 +183,45 @@ public class NewAddressBook extends AddressBook {
         System.out.println("Sorting contacts alphabetically by name...");
 
         // Sorting using streams
-        Mulcontact.stream()
+        mulcontact.stream()
                 .sorted(Comparator.comparing(contact -> contact.getFirstName().toLowerCase()))
                 .forEach(System.out::println);
+    }
+
+    //Method to sort by City
+    public void sortByCity() {
+        List<ContactPerson> sortedByCity = mulcontact.stream()
+                .sorted(Comparator.comparing(ContactPerson::getCity))
+                .toList();
+        System.out.println("Sorted by City:");
+        sortedByCity.forEach(System.out::println);
+    }
+
+    //Method to sort by State
+    public void sortByState() {
+        List<ContactPerson> sortedByState = mulcontact.stream()
+                .sorted(Comparator.comparing(ContactPerson::getState))
+                .toList();
+        System.out.println("Sorted by State:");
+        sortedByState.forEach(System.out::println);
+    }
+
+    //Method to sort by zip
+    public void sortByZip() {
+        List<ContactPerson> sortedByZip = mulcontact.stream()
+                .sorted(Comparator.comparing(ContactPerson::getZip))
+                .toList();
+        System.out.println("Sorted by Zip:");
+        sortedByZip.forEach(System.out::println);
+    }
+
+    //Display all contacts
+    public void displayContacts() {
+        if (mulcontact.isEmpty()) {
+            System.out.println("No contacts available.");
+        } else {
+            mulcontact.forEach(System.out::println);
+        }
     }
 
 }

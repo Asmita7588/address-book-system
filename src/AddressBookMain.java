@@ -25,8 +25,8 @@ public class AddressBookMain {
             System.out.println("7. view person by city or state");
             System.out.println("8. count person by city or state");
             System.out.println("9. sort contact by persons name");
-
-            System.out.println("10. Exit");
+            System.out.println("10. sort contact by persons city , state, Zip");
+            System.out.println("11. Exit");
 
 
             int option = scanner.nextInt();
@@ -72,9 +72,29 @@ public class AddressBookMain {
                     newAddressBook.sortContactsByName();
                     break;
                 case 10:
+                    boolean repeatOperation = true;
+                    while (repeatOperation) {
+                        System.out.println("Enter Choice \n1.sort by city \n 2.sort by state \n 3.sort by Zip \n4.Exit");
+                        int choice = scanner.nextInt();
+                        switch (choice) {
+                            case 1:
+                                newAddressBook.sortByCity();
+                                break;
+                            case 2:
+                                newAddressBook.sortByState();
+                                break;
+                            case 3:
+                                newAddressBook.sortByZip();
+                                break;
+                            case 4:
+                                repeatOperation = false;
+                            default:
+                                System.out.println("Invalid choice");
+                        }
+                    }
+                case 11:
                     repeat = false;
                    break;
-
                 default:
                     System.out.println("Invalid Option! ");
 

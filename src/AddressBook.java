@@ -8,7 +8,7 @@ class AddressBook {
     public AddressBook() {
         this.addContacts = new HashSet<>();
     }
-    List<ContactPerson> Mulcontact = new ArrayList<>();
+    List<ContactPerson> mulcontact = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     private ContactPerson[] contacts = new ContactPerson[100];
     private int contactCount = 0;
@@ -40,7 +40,7 @@ class AddressBook {
         String email = scanner.nextLine();
 
         ContactPerson newContact = new ContactPerson(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        Mulcontact.add(newContact);
+        mulcontact.add(newContact);
         System.out.println("Contact added successfully!");
     }
 
@@ -90,11 +90,11 @@ class AddressBook {
     }
 
     public void viewAllContacts() {
-        if (Mulcontact.isEmpty()) {
+        if (mulcontact.isEmpty()) {
             System.out.println("No contacts available.");
         } else {
             System.out.println("Contacts in this Address Book:");
-            for (ContactPerson contact : Mulcontact) {
+            for (ContactPerson contact : mulcontact) {
                 System.out.println(contact);
             }
         }
